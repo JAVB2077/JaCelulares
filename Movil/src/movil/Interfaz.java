@@ -4,6 +4,8 @@
  */
 package movil;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Joseph
@@ -125,7 +127,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnOnOfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOnOfActionPerformed
         // TODO add your handling code here:
-        if (cellphone.isOn() == false) {
+        if (cellphone.isOn() == false && cellphone.getBatery()>5) {
             cellphone.setOn(true);
             
             btnUseCellphone.enable(true);
@@ -138,6 +140,7 @@ public class Interfaz extends javax.swing.JFrame {
             btnCall.enable(false);
             btnCall.setVisible(false);
             cellphone.setOn(false);
+            JOptionPane.showMessageDialog(rootPane, "Recarge la bateria");
         }
         refresh(cellphone);
     }//GEN-LAST:event_btnOnOfActionPerformed
@@ -155,6 +158,7 @@ public class Interfaz extends javax.swing.JFrame {
             btnCall.setVisible(false);
             cellphone.setOn(false);
         }
+        
         refresh(cellphone);
     }//GEN-LAST:event_formWindowActivated
 
@@ -172,14 +176,23 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void btnUseCellphoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUseCellphoneActionPerformed
         // TODO add your handling code here: baja la bateria de 5 en 5
-        cellphone.setBatery(cellphone.getBatery()-5);
-        refresh(cellphone);
+        if (cellphone.getBatery() > 5) {
+            cellphone.setBatery(cellphone.getBatery()-5);
+        }else{
+            JOptionPane.showMessageDialog(rootPane, "Recarge la bateria");
+        }
+        refresh(cellphone);             
     }//GEN-LAST:event_btnUseCellphoneActionPerformed
 
     private void btnCallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCallActionPerformed
         // TODO add your handling code here: 1-12 saldo y -2 bateria agregar condiciones
-        cellphone.setAcountBalance(cellphone.getAcountBalance() - 12);
-        cellphone.setBatery(cellphone.getBatery() - 2);
+        if (cellphone.getAcountBalance() > 12 || cellphone.getBatery() > 2) {
+            cellphone.setAcountBalance(cellphone.getAcountBalance() - 12);
+            cellphone.setBatery(cellphone.getBatery() - 2);            
+        }
+        if(cellphone.getAcountBalance() < 12)JOptionPane.showMessageDialog(rootPane, "Recarge saldo");   
+        if(cellphone.getBatery() < 2)JOptionPane.showMessageDialog(rootPane, "Recarge la bateria");
+            
         refresh(cellphone);
     }//GEN-LAST:event_btnCallActionPerformed
     private void refresh (Cellphone c){
@@ -188,8 +201,8 @@ public class Interfaz extends javax.swing.JFrame {
         this.lblBatery.setText(String.valueOf(c.getBatery()));
         this.lblAcoutBalance.setText(String.valueOf(c.getAcountBalance()));
         this.lblOn.setText(String.valueOf(c.isOn()));
-        
     }
+    
     /**
      * @param args the command line arguments
      */
