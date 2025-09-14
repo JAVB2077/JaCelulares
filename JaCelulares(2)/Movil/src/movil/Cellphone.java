@@ -2,6 +2,7 @@
 package movil;
 
 public class Cellphone {
+    private String name;
     private String number;
     private int batery;
     private float acountBalance;
@@ -10,7 +11,8 @@ public class Cellphone {
     public Cellphone() {
     }
     
-    public Cellphone(String number, int batery, float acounBalance, boolean on, Object par4) {
+    public Cellphone(String name,String number, int batery, float acounBalance, boolean on) {
+        this.name = name;
         this.number = number;
         this.batery = batery;
         this.acountBalance = acountBalance;
@@ -18,6 +20,13 @@ public class Cellphone {
         
     }
  
+    public String getName(){
+        return name;
+    }
+    
+    public void setName(String name){
+        this.name = name;
+    }
     /**
      * @return the number
      */
@@ -76,7 +85,8 @@ public class Cellphone {
 
     @Override
     public String toString() {
-        return "Celphone{" + "number=" + getNumber() + ", batery=" + getBatery() + ", acountBalance=" + getAcountBalance() + ", on=" + isOn() + '}';
+        return "Celphone{" +"name ="+getName()+ ", number=" + getNumber() + ", batery=" + getBatery() 
+                + ", acountBalance=" + getAcountBalance() + ", on=" + isOn() + '}';
     }
     
 }

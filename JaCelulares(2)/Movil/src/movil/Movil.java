@@ -1,59 +1,144 @@
 package movil;
+
+import java.util.Scanner;
 import javax.swing.*;
+
 /**
  *
  * @author Joseph
  */
-public class Movil{
+public class Movil {
 
     /**
      * @param args the command line arguments
-     */    
-    
+     */
     public static void main(String[] args) {
         // TODO code application logic here
         Cellphone Celphone1 = new Cellphone();
-        Cellphone Celphone2 = new Cellphone("Desconocido",0,0.00F,false, null);
+        Cellphone Celphone2 = new Cellphone("Desconocido", "Desconocido", 0, 0.00F, false);
+        Scanner scanner = new Scanner(System.in);
 
-        JOptionPane.showMessageDialog(null,"Estado inicial de los Celphonees\n"+
-        Celphone1.toString() + "\n" +Celphone2.toString());
+        boolean a = true;
+        boolean validInput = false;
+        System.out.println("Estado inicial de los Celphones\n" + "Celphone1\n"
+                + Celphone1.toString() + "\nCelphone2\n" + Celphone2.toString());
+        //==Celphone1==
+        System.out.println("\n==Celphone1");
+        System.out.println("Nombre de Celphone1: ");
+        Celphone1.setName(scanner.nextLine());
+        System.out.println("Número de Celphone1: ");
+        Celphone1.setNumber(scanner.nextLine());
+        System.out.println("Batería de Celphone1: ");
+        String input = scanner.nextLine();
+        while (!validInput) {
+            try {
+                byte batery = Byte.parseByte(input);
+                if (batery > 100 || batery < 0) {
+                    System.out.println("Entrada inválida.");
+                    input = scanner.nextLine();
+                } else {
+                    validInput = true;
+                    Celphone1.setBatery(batery);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Debe ingresar un número.");
+                input = scanner.nextLine();
+            }
+        }
+        validInput = false;
+        Celphone1.setBatery(Byte.parseByte(input));
 
-        Celphone1.setNumber("123-123-1234");
-        Celphone1.setBatery(79);
-        Celphone1.setAcountBalance(137.00F);
-        Celphone1.setOn(true);
+        System.out.println("Saldo de Celphone1: ");
+        input = scanner.nextLine();
 
-        Celphone2.setNumber("231-157-0409");
-        Celphone2.setBatery(12);
-        Celphone2.setAcountBalance(2.00F);
-        Celphone2.setOn(false);
+        while (!validInput) {
+            try {
+                if (Float.parseFloat(input) < 0) {
+                    System.out.println("Entrada inválida. Número negativo");
+                    input = scanner.nextLine();
+                } else {
+                    validInput = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Se espera un número");
+                input = scanner.nextLine();
+            }
+        }
+        validInput = false;
+        Celphone1.setAcountBalance(Float.parseFloat(input));
 
-        JOptionPane.showMessageDialog(null,"Estado actural de los Celphonees\n"+
-                Celphone1.toString() + "\n" +Celphone2.toString());
+        System.out.println("Celphone1 On/Off (Y/N): ");
+        input = scanner.nextLine();
 
-        JOptionPane.showMessageDialog(null,"Celphone 1\n"+
-                "Numero de telefono: "+Celphone1.getNumber());
+        while (!input.equalsIgnoreCase("Y") && !input.equalsIgnoreCase("N")) {
+            System.out.println("Entrada inválida. Por favor ingrese Y o N: ");
+            input = scanner.nextLine();
+        }
 
-        JOptionPane.showMessageDialog(null,"Celphone 1\n"+
-                "Bateria: "+Celphone1.getBatery() + "%");
+        if (input == "N") {
+            a = false;
+        }
+        Celphone1.setOn(a);
 
-        JOptionPane.showMessageDialog(null,"Celphone 1\n"+
-                "Saldo: $ "+Celphone1.getAcountBalance());
+        //==Celphone2==
+        System.out.println("\n==Celphone2");
+        System.out.println("Nombre de Celphone2: ");
+        Celphone2.setName(scanner.nextLine());
+        System.out.println("Número de Celphone2: ");
+        Celphone2.setNumber(scanner.nextLine());
+        System.out.println("Batería de Celphone2: ");
+        input = scanner.nextLine();
+        while (!validInput) {
+            try {
+                byte batery = Byte.parseByte(input);
+                if (batery > 100 || batery < 0) {
+                    System.out.println("Entrada inválida.");
+                    input = scanner.nextLine();
+                } else {
+                    validInput = true;
+                    Celphone1.setBatery(batery);
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Debe ingresar un número.");
+                input = scanner.nextLine();
+            }
+        }
+        validInput = false;
+        Celphone2.setBatery(Byte.parseByte(input));
 
-        JOptionPane.showMessageDialog(null,"Celphone 1\n"+
-                "Estado: "+Celphone1.isOn());
+        System.out.println("Saldo de Celphone2: ");
+        input = scanner.nextLine();
+        while (!validInput) {
+            try {
+                if (Float.parseFloat(input) < 0) {
+                    System.out.println("Entrada inválida. Número negativo");
+                    input = scanner.nextLine();
+                } else {
+                    validInput = true;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Entrada inválida. Se espera un número");
+                input = scanner.nextLine();
+            }
+        }
+        validInput = false;
+        Celphone2.setAcountBalance(Float.parseFloat(input));
 
-        JOptionPane.showMessageDialog(null,"Celphone 2\n"+
-                "Numero de telefono: "+Celphone2.getNumber());
+        System.out.println("Celphone2 On/Off (Y/N): ");
 
-        JOptionPane.showMessageDialog(null,"Celphone 2\n"+
-                "Bateria: "+Celphone2.getBatery() + "%");
+        while (!input.equalsIgnoreCase("Y") && !input.equalsIgnoreCase("N")) {
+            System.out.println("Entrada inválida. Por favor ingrese Y o N: ");
+            input = scanner.nextLine();
+        }
 
-        JOptionPane.showMessageDialog(null,"Celphone 2\n"+
-                "Saldo: $ "+Celphone2.getAcountBalance());
-
-        JOptionPane.showMessageDialog(null,"Celphone 2\n"+
-                "Estado: "+Celphone2.isOn());
+        if (input == "N") {
+            a = false;
+        }
+        Celphone2.setOn(a);
+        
+        System.out.println("Estado inicial de los Celphones\n" + "Celphone1\n"
+                + Celphone1.toString() + "\nCelphone2\n" + Celphone2.toString());
+        
     }
-    
+
 }
